@@ -1,0 +1,81 @@
+# Copyright © King's College London
+# SPDX-License-Identifier: Apache-2.0
+#
+# This file has been modified from the original source.
+
+# ----------------------------------------------------------------------------
+# General Installation Instructions
+
+Follow these instructions to install SVR-lite application.
+The installation instructions assume you are using a clean Ubuntu 
+installation, hence various required software are also downloaded, e.g.: Python, CMake, etc.
+The software can also be installed on OSX.
+
+# ----------------------------------------------------------------------------
+# Directory Setup
+
+cd /path/to/software/installation/directory/of/your/choice
+(i.e.: /Users/your-user-id/Software)
+
+# ----------------------------------------------------------------------------
+# Install Required Software/Libraries: Ubuntu (>18/20)
+# Note: this version of SVR-lite is tested on Ubuntu 20.04. There is a known issue with Classic TBB 
+# on more recent versions of Ubuntu. An updated version using OneTBB is under development.
+
+# Check all software up-to-date
+sudo apt-get update
+
+sudo apt install git
+sudo apt-get install cmake cmake-curses-gui
+sudo apt-get install python
+
+# Install libraries needed for MIRTK
+sudo apt-get install build-essential libtbb-dev libboost-all-dev libeigen3-dev zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget zram-config fltk1.3-dev libgl1-mesa-glx mesa-utils libglm-dev
+
+# Install libraries needed for SVR-lite
+sudo apt install libspdlog-dev
+
+# ----------------------------------------------------------------------------
+# Install Required Software/Libraries: Mac OS X
+
+# Install 'brew' package manager from https://brew.sh/: 
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# Install libraries needed for MIRTK
+brew install git cmake boost tbb eigen fltk 
+
+# Install libraries needed for SVR-lite
+brew install spdlog
+
+# ----------------------------------------------------------------------------
+# Install SVR-lite
+
+# Download SVR-lite
+git clone https://github.com/baby-MedIA/SVR-lite.git
+
+# ----------------------------------------------------------------------------
+# Build project
+
+# build.sh will create ./build/release folder and build first MIRTK then SVR-lite.
+# Edit this script if required for individual setup, or run the steps manually.
+
+./build.sh
+
+# ----------------------------------------------------------------------------
+# Add Executable files to the Path
+
+# edit path file using nano text editor:
+nano ~/.bash_profile
+
+# or:
+nano ~/.bashrc
+
+# Enter the bottom of the text editor:
+export PATH="$PATH:/your_chosen_location/build/lib/tools"
+
+# activate:
+source ~/.bashrc 
+
+
+# To test, try typing "svr" in a terminal window. If it is working, the command help will show.
+# You may need to reboot your computer
